@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">pda</string>
+    <string name="desc_back">Quay lại</string>
+    <string name="desc_logout">Đăng xuất</string>
+    <string name="desc_edit">Chỉnh sửa</string>
+    <string name="desc_search">Tìm kiếm</string>
+</resources>
