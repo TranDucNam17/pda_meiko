@@ -1,4 +1,4 @@
-package com.example.pda.ui.kiemke.lot;
+package com.example.pda.ui.kiemke.kho;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -19,7 +19,7 @@ import com.example.pda.R;
 
 import java.util.Calendar;
 
-public class KiemKeLotDetailActivity extends AppCompatActivity {
+public class KiemKeKhoDetailActivity extends AppCompatActivity {
 
     private ImageView btnBack;
     private ViewGroup containerData;
@@ -29,7 +29,7 @@ public class KiemKeLotDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kiem_ke_lot_detail);
+        setContentView(R.layout.activity_kiem_ke_kho_detail);
 
         initViews();
         initEvents();
@@ -135,17 +135,17 @@ public class KiemKeLotDetailActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.dialog_full_info_kiem_ke);
         dialog.setCancelable(true);
 
-        setupRow(dialog.findViewById(R.id.rowShelf), "Mã Giá đỡ", "GD-LOT-01");
-        setupRow(dialog.findViewById(R.id.rowNvl), "Mã NVL", "NVL-LOT-SPEC-01");
-        setupRow(dialog.findViewById(R.id.rowDescription), "Mô tả SP 1", "Linh kiện bo mạch xử lý");
-        setupRow(dialog.findViewById(R.id.rowUnit), "Đơn vị", "Hộp");
-        setupRow(dialog.findViewById(R.id.rowAuditDate), "Ngày kiểm kê", "2024-05-22");
-        setupRow(dialog.findViewById(R.id.rowLotNumber), "Số Lô", "SN-LOT-99");
-        setupRow(dialog.findViewById(R.id.rowImportDate), "Ngày nhập", "2024-03-01");
-        setupRow(dialog.findViewById(R.id.rowWarehouse), "Kho", "KHO-TRUNG-GIAN");
-        setupRow(dialog.findViewById(R.id.rowExpiry), "HSD", "2026-05-15");
-        setupRow(dialog.findViewById(R.id.rowPoNo), "PoNo", "PO-LOT-2024-ABC");
-        setupRow(dialog.findViewById(R.id.rowDept), "BP đặt", "BP-SAN-XUAT");
+        setupRow(dialog.findViewById(R.id.rowShelf), "Mã Giá đỡ", "GD-WH-01");
+        setupRow(dialog.findViewById(R.id.rowNvl), "Mã NVL", "NVL-ABC-123");
+        setupRow(dialog.findViewById(R.id.rowDescription), "Mô tả SP 1", "Nguyên vật liệu nhập kho");
+        setupRow(dialog.findViewById(R.id.rowUnit), "Đơn vị", "PCS");
+        setupRow(dialog.findViewById(R.id.rowAuditDate), "Ngày kiểm kê", "2024-05-24");
+        setupRow(dialog.findViewById(R.id.rowLotNumber), "Số Lô", "SN-WH-99");
+        setupRow(dialog.findViewById(R.id.rowImportDate), "Ngày nhập", "2024-04-10");
+        setupRow(dialog.findViewById(R.id.rowWarehouse), "Kho", "KHO-NVL-01");
+        setupRow(dialog.findViewById(R.id.rowExpiry), "HSD", "2027-04-10");
+        setupRow(dialog.findViewById(R.id.rowPoNo), "PoNo", "PO-WH-2024");
+        setupRow(dialog.findViewById(R.id.rowDept), "BP đặt", "BP-LOGISTICS");
 
         Button btnClose = dialog.findViewById(R.id.btnClose);
         if (btnClose != null) btnClose.setOnClickListener(v -> dialog.dismiss());

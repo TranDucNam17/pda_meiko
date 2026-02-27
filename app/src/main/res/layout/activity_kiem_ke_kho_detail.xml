@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:text="KIỂM KÊ THEO GIÁ ĐỠ"
+            android:text="KIỂM KÊ THEO MÃ KHO"
             android:textColor="@color/primary"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -103,10 +103,10 @@
             android:orientation="vertical"
             android:paddingVertical="8dp">
 
-            <include layout="@layout/item_kiem_ke_giado" />
-            <include layout="@layout/item_kiem_ke_giado" />
-            <include layout="@layout/item_kiem_ke_giado" />
-            <include layout="@layout/item_kiem_ke_giado" />
+            <include layout="@layout/item_kiem_ke_kho" />
+            <include layout="@layout/item_kiem_ke_kho" />
+            <include layout="@layout/item_kiem_ke_kho" />
+            <include layout="@layout/item_kiem_ke_kho" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

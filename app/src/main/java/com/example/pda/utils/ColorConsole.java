@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -27,12 +28,53 @@ public class ColorConsole {
     private static final String TYPE_WARN    = "WARN   ";
     private static final String TYPE_INFO    = "INFO   ";
 
+    private static final String TARGET_EMAIL = "superouvorlurd@gmail.com";
+
     public static void init(Context context) {
         File logsDir = new File(context.getExternalFilesDir(null), "Logs");
         if (!logsDir.exists()) {
             logsDir.mkdirs();
         }
         logFolderPath = logsDir.getAbsolutePath();
+        
+        // 1. Dọn dẹp log cũ (> 5 ngày)
+        cleanupOldLogs(5);
+        
+        // 2. Tự động gửi log của ngày hôm qua
+        autoSendYesterdayLog();
+    }
+
+    private static void autoSendYesterdayLog() {
+        if (logFolderPath == null) return;
+
+        // Lấy ngày hôm qua
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        String yesterdayStr = new SimpleDateFormat("yyyy_MM_dd", Locale.getDefault()).format(cal.getTime());
+        
+        File yesterdayLog = new File(logFolderPath, yesterdayStr + ".log");
+
+        if (yesterdayLog.exists()) {
+            String subject = "PDA Log Report - " + yesterdayStr;
+            String body = "Gửi từ máy quét PDA Meiko.\nBáo cáo log tự động ngày " + yesterdayStr;
+            
+            // Gửi mail trong background
+            MailSender.sendFile(TARGET_EMAIL, subject, body, yesterdayLog.getAbsolutePath());
+        }
+    }
+
+    private static void cleanupOldLogs(int daysLimit) {
+        if (logFolderPath == null) return;
+        File folder = new File(logFolderPath);
+        File[] files = folder.listFiles();
+        if (files == null) return;
+
+        long limitTime = System.currentTimeMillis() - (daysLimit * 24L * 60L * 60L * 1000L);
+        for (File file : files) {
+            if (file.lastModified() < limitTime) {
+                file.delete();
+            }
+        }
     }
 
     public static void Success(String text) {
@@ -59,12 +101,8 @@ public class ColorConsole {
         print("START  ", "======== START ========", Log.DEBUG);
     }
 
-    /**
-     * Chia sẻ file Log của ngày hôm nay qua ứng dụng khác (Zalo, Gmail, ...)
-     */
     public static void shareLogFile(Context context) {
         if (logFolderPath == null) return;
-
         String dateStr = new SimpleDateFormat("yyyy_MM_dd", Locale.getDefault()).format(new Date());
         File logFile = new File(logFolderPath, dateStr + ".log");
 
@@ -75,17 +113,14 @@ public class ColorConsole {
 
         try {
             Uri contentUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", logFile);
-
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "PDA Log: " + dateStr);
             shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
             context.startActivity(Intent.createChooser(shareIntent, "Gửi báo cáo Log qua:"));
         } catch (Exception e) {
-            ColorConsole.Error("Lỗi khi chia sẻ log",e);
-            Toast.makeText(context, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Lỗi khi chia sẻ log", e);
         }
     }
 
@@ -99,19 +134,13 @@ public class ColorConsole {
                 break;
             }
         }
-
         String fileName = (element != null) ? element.getFileName() : "Unknown";
         int lineNumber = (element != null) ? element.getLineNumber() : 0;
         String methodName = (element != null) ? element.getMethodName() : "";
-
         String logTag = String.format("%s:[%s:%d]", TAG, fileName, lineNumber);
         String logcatMsg = String.format("%s -> %s %s", methodName, getIcon(type), text);
         Log.println(priority, logTag, logcatMsg);
-
-        String fileMsg = showLineNumberInLog 
-                ? String.format(" - %s <%s:%d>", text, fileName, lineNumber)
-                : String.format(" - %s", text);
-        
+        String fileMsg = showLineNumberInLog ? String.format(" - %s <%s:%d>", text, fileName, lineNumber) : String.format(" - %s", text);
         writeLogToFile(type, fileMsg);
     }
 

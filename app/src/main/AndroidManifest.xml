@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pda">
 
-        <!-- Cấu hình để chia sẻ file log an toàn -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.pda.fileprovider"
@@ -85,6 +87,11 @@
             android:name=".ui.kiemke.lot.KiemKeLotDetailActivity"
             android:exported="false"
             android:label="Kiểm kê theo mã Lot" />
+
+        <activity
+            android:name=".ui.kiemke.kho.KiemKeKhoDetailActivity"
+            android:exported="false"
+            android:label="Kiểm kê theo mã kho" />
 
     </application>
 

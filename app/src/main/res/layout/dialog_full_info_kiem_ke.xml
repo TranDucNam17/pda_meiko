@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_rounded"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Chi tiết thông tin kiểm kê"
+            android:textColor="@color/primary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnCloseIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/desc_back"
+            android:src="@drawable/ic_close"
+            app:tint="@color/gray_medium" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:background="#F0F0F0" />
+
+    <!-- Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constrainedHeight="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider_horizontal"
+            android:orientation="vertical"
+            android:showDividers="middle">
+
+            <include
+                android:id="@+id/rowShelf"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowNvl"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowDescription"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowUnit"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowAuditDate"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowLotNumber"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowImportDate"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowWarehouse"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowExpiry"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowPoNo"
+                layout="@layout/row_full_info" />
+
+            <include
+                android:id="@+id/rowDept"
+                layout="@layout/row_full_info" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Footer Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:text="Đóng"
+        android:textColor="@color/primary"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.pda.R;
 import com.example.pda.ui.kiemke.barcode.KiemKeBarcodeDetailActivity;
 import com.example.pda.ui.kiemke.giado.KiemKeGiaDoDetailActivity;
+import com.example.pda.ui.kiemke.kho.KiemKeKhoDetailActivity;
 import com.example.pda.ui.kiemke.lot.KiemKeLotDetailActivity;
 import com.example.pda.ui.kiemke.nvl.KiemKeNvlDetailActivity;
 import com.google.android.material.card.MaterialCardView;
@@ -20,6 +21,7 @@ public class QuanLyKiemKeActivity extends AppCompatActivity {
     private MaterialCardView cardKiemKeGiaDo;
     private MaterialCardView cardKiemKeNvl;
     private MaterialCardView cardKiemKeLot;
+    private MaterialCardView cardKiemKeKho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class QuanLyKiemKeActivity extends AppCompatActivity {
         cardKiemKeGiaDo = findViewById(R.id.cardKiemKeGiaDo);
         cardKiemKeNvl = findViewById(R.id.cardKiemKeNvl);
         cardKiemKeLot = findViewById(R.id.cardKiemKeLot);
+        cardKiemKeKho = findViewById(R.id.cardKiemKeKho);
     }
 
     private void initEvents() {
@@ -58,6 +61,11 @@ public class QuanLyKiemKeActivity extends AppCompatActivity {
 
         cardKiemKeLot.setOnClickListener(v -> {
             Intent intent = new Intent(this, KiemKeLotDetailActivity.class);
+            startActivity(intent);
+        });
+
+        cardKiemKeKho.setOnClickListener(v -> {
+            Intent intent = new Intent(this, KiemKeKhoDetailActivity.class);
             startActivity(intent);
         });
     }
